@@ -1,0 +1,32 @@
+<stmt>
+    <name> = <knowld>
+
+
+<knowld>
+    <expr> <binop> <expr>
+    <unop> <expr>
+
+
+<expr>
+    <name>
+    ( <knowld> )
+    
+
+<binop>
+    <name>
+
+
+<unop>
+    <name>
+
+
+<name>
+    letter ( letter | digit )*
+
+
+letter
+    a, ..., z, A, ..., Z
+
+
+digit
+    0, ..., 9
