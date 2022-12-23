@@ -13,11 +13,11 @@
     
 
 <binop>
-    <name>
+    letter ( letter | digit | space )*
 
 
 <unop>
-    <name>
+    letter ( letter | digit | space )*
 
 
 <name>
