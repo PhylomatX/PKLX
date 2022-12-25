@@ -2,6 +2,7 @@ import os
 import re
 from typing import List, Tuple
 from .objects import PPLX
+import networkx as nx
 
 
 def load(folder_path: str) -> Tuple[List[str], List[str]]:
@@ -66,3 +67,7 @@ def parse_statement(relations: List[str], statement: str) -> PPLX:
     tokens = lexer(relations, statement)
     parsed_statement = PPLX().parse(tokens)
     return parsed_statement
+
+
+def pplx_to_graph(pplx: List[PPLX]) -> nx.DiGraph:
+    pass

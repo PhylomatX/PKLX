@@ -3,15 +3,14 @@ from pplx.parser import parse_statement
 
 if __name__ == '__main__':
     statements = [
-        'Abraham = Hans im Glück HAT GERN ( ( grünen Apfel MAG Birne) IST EIN leckeres Obst )',
+        'Abraham = ( GLÜCKLICHER Hans im Glück ) WEISS ( ( grüner Apfel UND Birne) IST EIN leckeres Obst )',
     ]
     relations = [
-        'HAT GERN',
+        'WEISS',
         'IST EIN',
-        'MAG',
+        'UND',
+        'GLÜCKLICHER'
     ]
     for statement in statements:
-        import ipdb
-        ipdb.set_trace()
         parsed_statement = parse_statement(relations, statement)
         print(parsed_statement)
