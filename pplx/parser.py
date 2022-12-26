@@ -6,19 +6,23 @@ import networkx as nx
 
 
 def load(folder_path: str) -> Tuple[List[str], List[str]]:
+    statements = []
+    relations = []
     files = os.listdir(folder_path)
     for file in files:
         if file == '.ontology':
             with open(os.path.join(folder_path, file), 'r') as f:
                 relations = f.readlines()
+            relations = parse_relations(relations)
         else:
             with open(os.path.join(folder_path, file), 'r') as f:
-                statements = f.readlines()
+                statements.extend(f.readlines())
+    statements = parse_statements(relations, statements)
     return relations, statements
 
 
 def parse_relations(relations: List[str]) -> List[str]:
-    return [relation.split('-/')[0].strip() for relation in relations]
+    return [relation.split('-/')[0].strip().replace('\n', '') for relation in relations]
 
 
 def lexer(relations: List[str], statement: str) -> List[str]:
@@ -69,5 +73,5 @@ def parse_statement(relations: List[str], statement: str) -> PPLX:
     return parsed_statement
 
 
-def pplx_to_graph(pplx: List[PPLX]) -> nx.DiGraph:
-    pass
+def statements_to_graph(statements: List[PPLX]) -> nx.DiGraph:
+    return nx.union_all([statement.to_graph()[1] for statement in statements])
