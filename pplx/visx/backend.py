@@ -25,7 +25,7 @@ def format_graph(graph: nx.Graph) -> nx.Graph:
         graph.nodes[node]['size'] = 10
         graph.nodes[node]['label'] = " ".join(node.split()[1:])
     for source, destination in graph.edges:
-        graph[source][destination]['id'] = str(uuid.uuid4())
+        graph[source][destination]['id'] = source + '-/-' + destination
         graph[source][destination]['from'] = source
         graph[source][destination]['to'] = destination
         graph[source][destination]['width'] = 2
@@ -45,7 +45,11 @@ def nodes():
 def related():
     data = request.get_json()
     node = data['request']
-    graph = GRAPH.subgraph(nx.node_connected_component(GRAPH.to_undirected(), NODE_DICT[node]))
+    try: 
+        node = NODE_DICT[node]
+    except KeyError:
+        pass
+    graph = GRAPH.subgraph(nx.node_connected_component(GRAPH.to_undirected(), node))
     graph = format_graph(graph)
     data = nx.json_graph.node_link_data(graph)
     return json.dumps(data)
