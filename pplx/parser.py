@@ -1,22 +1,22 @@
 import os
 import re
 from typing import List, Tuple
-from .objects import PPLX
+from .objects import PPLX, Statement
 import networkx as nx
 
 
 def load(folder_path: str) -> Tuple[List[str], List[str]]:
     statements = []
     relations = []
-    files = os.listdir(folder_path)
+    files = [os.path.join(folder, file) for folder, _, files in os.walk(folder_path) for file in files]
     for file in files:
-        if file == '.ontology':
-            with open(os.path.join(folder_path, file), 'r') as f:
-                relations = f.readlines()
+        if file.split('/')[-1] == '.ontology':
+            with open(os.path.join(folder_path, file), 'r') as file:
+                relations = file.readlines()
             relations = parse_relations(relations)
         else:
-            with open(os.path.join(folder_path, file), 'r') as f:
-                statements.extend(f.readlines())
+            with open(os.path.join(folder_path, file), 'r') as file:
+                statements.extend(file.readlines())
     statements = parse_statements(relations, statements)
     return relations, statements
 
@@ -27,7 +27,9 @@ def parse_relations(relations: List[str]) -> List[str]:
 
 def lexer(relations: List[str], statement: str) -> List[str]:
     split_tokens = [token for token in re.split(r'(\W)', statement) if token.strip()]
-    
+    relations = relations.copy()
+    # longer relations should be matched first
+    relations.sort(key=len, reverse=True)
     # merge as many consecutive tokens into a relation as possible
     relation_merged_tokens = []
     i = 0
@@ -57,6 +59,17 @@ def lexer(relations: List[str], statement: str) -> List[str]:
     if current_string:
         tokens.append(current_string.strip())
 
+    # remove optional markdown syntax
+    i = 0
+    while i < len(tokens) - 1:
+        if tokens[i] == '[' and tokens[i+1] == '[':
+            del tokens[i:i+2]
+            continue
+        if tokens[i] == ']' and tokens[i+1] == ']':
+            del tokens[i:i+2]
+            continue
+        i += 1
+
     return tokens
 
 
@@ -69,9 +82,36 @@ def parse_statements(relations: List[str], statements: List[str]) -> List[PPLX]:
 
 def parse_statement(relations: List[str], statement: str) -> PPLX:
     tokens = lexer(relations, statement)
-    parsed_statement = PPLX().parse(tokens)
+    parsed_statement = PPLX().parse(tokens, relations)
     return parsed_statement
 
 
 def statements_to_graph(statements: List[PPLX]) -> nx.DiGraph:
-    return nx.union_all([statement.to_graph()[1] for statement in statements])
+    graph = nx.compose_all([statement.to_graph()[1] for statement in statements])
+    for node in list(graph.nodes):
+        try:
+            variable = graph.nodes[node]['variable']
+            nx.contracted_nodes(graph, node, variable, copy=False)
+        except KeyError:
+            pass
+    return graph
+
+
+def extract_from_statements(statements: List[PPLX], variable: str, done: List[str] = None) -> List[PPLX]:
+    extracted_statements = []
+    statement_variables = []
+    if done is None:
+        done = []
+    if variable in done:
+        return []
+    for statement in statements:
+        if statement.contains(variable):
+            extracted_statements.append(statement)
+            if type(statement) == Statement:
+                statement_variables.extend(statement.variable.name)
+    done.append(variable)
+    for statement_variable in statement_variables:
+        if statement_variable not in done:
+            extracted_statements.extend(extract_from_statements(statements, statement_variable, done))
+    extracted_statements = list(set(extracted_statements))
+    return extracted_statements

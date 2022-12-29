@@ -2,7 +2,7 @@ var apiUri = ""
 
 var nodes, edges, network;
 
-var instructionText = 'Click on nodes to <b>find related entities</b>. SHIFT+click to <b>collapse nodes</b>. The green node was the starting point.'
+var instructionText = 'Click on nodes to <b>find additional relations</b>. SHIFT+click to <b>collapse nodes</b>. The green node was the starting point.'
 var retrievalText = "Retrieving data. Please wait...";
 var noMoreDataText = "No more data found...";
 
@@ -153,7 +153,7 @@ function draw() {
           });
 
           $('#names_box').select2({
-            minimumInputLength: 4
+            minimumInputLength: 1
           });
     });
     $(document).on('keydown', function (event) {

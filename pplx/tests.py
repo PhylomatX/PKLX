@@ -1,8 +1,8 @@
-from pplx.parser import parse_statement, load
+from pplx.parser import load, extract_from_statements
 from pplx.settings import FOLDER_PATH
 
 if __name__ == '__main__':
     relations, statements = load(FOLDER_PATH)
-    for statement in statements:
-        anchor, graph = statement.to_graph()
+    extracted_statements = extract_from_statements(statements, 'A')
+    for statement in extracted_statements:
         print(statement)
