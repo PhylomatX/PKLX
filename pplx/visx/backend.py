@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import networkx as nx
 import json
-from pplx.settings import FOLDER_PATH
+from pplx.settings import SETTINGS
 from pplx.parser import load, statements_to_graph
 from pplx.utils import bfs
 import uuid
@@ -56,7 +56,7 @@ def related():
 def main():
     global GRAPH
     global NODES
-    relations, statements = load(FOLDER_PATH)
+    relations, statements = load(SETTINGS['FOLDER_PATH'])
     GRAPH = statements_to_graph(statements)
     node_names = [node for node in GRAPH.nodes if GRAPH.nodes[node]['node_type'] == 'variable']
     NODES = json.dumps([{"id": node, "text": node} for node in node_names])

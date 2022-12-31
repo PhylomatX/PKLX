@@ -3,7 +3,7 @@ import re
 from typing import List, Tuple
 from .objects import PPLX, Statement
 import networkx as nx
-from .settings import DELIMITER
+from .settings import SETTINGS
 
 
 def load(folder_path: str) -> Tuple[List[str], List[str]]:
@@ -20,7 +20,7 @@ def load(folder_path: str) -> Tuple[List[str], List[str]]:
                 lines = file.readlines()
             for line in lines:
                 # separate statements from text by using the delimiter
-                splitted_line = line.split(DELIMITER)
+                splitted_line = line.split(SETTINGS['DELIMITER'])
                 if len(splitted_line) % 2 == 0:
                     raise Exception(f'Invalid syntax in file: {file_name}, line: {line}')
                 else:
@@ -30,7 +30,7 @@ def load(folder_path: str) -> Tuple[List[str], List[str]]:
 
 
 def parse_relations(relations: List[str]) -> List[str]:
-    return [relation.split(DELIMITER)[0].strip().replace('\n', '') for relation in relations]
+    return [relation.split(SETTINGS['DELIMITER'])[0].strip().replace('\n', '') for relation in relations]
 
 
 def lexer(relations: List[str], statement: str) -> List[str]:
