@@ -1,0 +1,91 @@
+body{        
+    padding-top: 54px;
+    padding-bottom: 40px;
+}
+html, body {
+    font: 11pt arial;
+    background-color: #333333;
+}
+.fixed-header, .fixed-footer{
+    width: 100%;
+    position: fixed;        
+    background-color: #111111;
+    margin-left: -8px;
+    padding: 11px;
+    color: #fff;
+}
+.fixed-header{
+    top: 0;
+    min-width: 950px;
+    height: 40px;
+}
+.fixed-footer{
+    bottom: 0;
+}    
+a {
+    color: #dd4b39
+}
+#statement {
+    height: 80%;
+    margin-right: 20px;
+    margin-top: 3px;
+    min-width: 100px;
+    max-width: 440px;
+    float: right;
+    background-color: #111111;
+    color: #BBBBBB;
+    outline: none;
+}
+#network {      
+    width: 99%;
+    height: 100%;
+    margin-left: 0.5%;
+    outline: none
+}
+#statement2 {
+    color: #BBBBBB;
+}
+#frame {
+    width: 280px; 
+    height: 27px;
+    overflow: hidden;
+    border: 2px solid #dd4b39;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 10px;
+    margin-top: 4px;
+    float: left;
+}
+#names_box {
+    margin-left: -1px;
+    margin-top: -2px;
+    width: 282px;
+    height: 29px;
+}
+.vis-network {
+    outline: none;
+}
+.loader {
+    position: fixed;
+    border: 16px solid #dd4b39;
+    border-radius: 50%;
+    border-top: 16px solid #111111 ;
+    width: 10vh;
+    height: 10vh;
+    top: 50%;
+    left: 50%;
+    margin-top: -5vh; /* Negative half of height. */
+    margin-left: -5vh; 
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
