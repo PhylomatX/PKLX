@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pplx"
+version = "0.0.1"
+authors = [
+  { name="PhylomatX", email="phylomatx@gmail.com" },
+]
+description = "The Popper Programming Language."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "networkx",
+    "flask", 
+    "typing", 
+    "argparse"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/PhylomatX"

@@ -6,4 +6,5 @@ setup(
     author='PhylomatX',
     author_email='phylomatx@gmail.com',
     description='PPLX',
+    install_requires=['networkx', 'flask', 'typing', 'argparse'],
 )
