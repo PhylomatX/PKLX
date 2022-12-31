@@ -1,7 +1,7 @@
 import argparse
-from visx.backend import main as main_view
+from .visx.backend import main as main_view
 from pplx.parser import load, extract_from_statements
-from settings import SETTINGS, set_settings
+from .settings import SETTINGS, set_settings
 
 
 def view():
