@@ -1,7 +1,8 @@
 import argparse
 from .visx.backend import main as main_view
 from pplx.parser import load, extract_from_statements
-from .settings import SETTINGS, set_settings
+from .settings import SETTINGS
+from .settings import set_settings as internal_set_settings
 
 
 def view():
@@ -21,8 +22,27 @@ def collect(variable, file):
 
 
 def set_settings(key, value):
-    set_settings(key, value)
+    internal_set_settings(key, value)
 
+
+def cmd_view():
+    main_view()
+
+
+def cmd_collect():
+    parser = argparse.ArgumentParser(description='Collect knowledge about a specific variable')
+    parser.add_argument('variable', type=str, help='The variable to collect knowledge about')
+    parser.add_argument('--file', type=str, help='Save the output into a file')
+    args = parser.parse_args()
+    collect(args.variable, args.file)
+
+
+def cmd_set_settings():
+    parser = argparse.ArgumentParser(description='Set settings')
+    parser.add_argument('key', type=str, help='The key of the setting')
+    parser.add_argument('value', type=str, help='The value of the setting')
+    args = parser.parse_args()
+    internal_set_settings(args.key, args.value)
 
 
 if __name__ == '__main__':
