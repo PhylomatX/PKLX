@@ -22,6 +22,7 @@ dependencies = [
     "typing", 
     "argparse"
 ]
+package_data={'': ['*.png', '*.html', '*.css', '*.js', '*.ico', '*.webmanifest', '*.json']},
 
 [project.urls]
 "Homepage" = "https://github.com/PhylomatX"
