@@ -52,9 +52,16 @@ def related():
     data = nx.json_graph.node_link_data(graph)
     return json.dumps(data)
 
-if __name__ == '__main__':
+
+def main():
+    global GRAPH
+    global NODES
     relations, statements = load(FOLDER_PATH)
     GRAPH = statements_to_graph(statements)
     node_names = [node for node in GRAPH.nodes if GRAPH.nodes[node]['node_type'] == 'variable']
     NODES = json.dumps([{"id": node, "text": node} for node in node_names])
     app.run()
+
+
+if __name__ == '__main__':
+    main()

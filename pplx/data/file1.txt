@@ -1,5 +1,4 @@
-M = A IS C
-B IS C
-[[A9 B]] IS D 
-( D IS C ) IS TRUE IF ( A IS B )
-M IS R
+-/ M = A IS C -/ Das ist kein PPLX. -/ B IS C -/
+-/ [[A9 B]] IS D -/ 
+-/ ( D IS C ) IS TRUE IF ( A IS B ) -/
+-/ M IS R -/

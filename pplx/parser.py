@@ -3,26 +3,34 @@ import re
 from typing import List, Tuple
 from .objects import PPLX, Statement
 import networkx as nx
+from .settings import DELIMITER
 
 
 def load(folder_path: str) -> Tuple[List[str], List[str]]:
     statements = []
     relations = []
-    files = [os.path.join(folder, file) for folder, _, files in os.walk(folder_path) for file in files]
-    for file in files:
-        if file.split('/')[-1] == '.ontology':
-            with open(os.path.join(folder_path, file), 'r') as file:
+    file_names = [os.path.join(folder, file) for folder, _, files in os.walk(folder_path) for file in files]
+    for file_name in file_names:
+        if file_name.split('/')[-1] == '.ontology':
+            with open(os.path.join(folder_path, file_name), 'r') as file:
                 relations = file.readlines()
             relations = parse_relations(relations)
         else:
-            with open(os.path.join(folder_path, file), 'r') as file:
-                statements.extend(file.readlines())
+            with open(os.path.join(folder_path, file_name), 'r') as file:
+                lines = file.readlines()
+            for line in lines:
+                # separate statements from text by using the delimiter
+                splitted_line = line.split(DELIMITER)
+                if len(splitted_line) % 2 == 0:
+                    raise Exception(f'Invalid syntax in file: {file_name}, line: {line}')
+                else:
+                    statements.extend(splitted_line[1::2])
     statements = parse_statements(relations, statements)
     return relations, statements
 
 
 def parse_relations(relations: List[str]) -> List[str]:
-    return [relation.split('-/')[0].strip().replace('\n', '') for relation in relations]
+    return [relation.split(DELIMITER)[0].strip().replace('\n', '') for relation in relations]
 
 
 def lexer(relations: List[str], statement: str) -> List[str]:
