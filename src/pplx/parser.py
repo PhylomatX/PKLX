@@ -11,7 +11,7 @@ def load(folder_path: str) -> Tuple[List[str], List[str]]:
     relations = []
     file_names = [os.path.join(folder, file) for folder, _, files in os.walk(folder_path) for file in files]
     for file_name in file_names:
-        if file_name.split('/')[-1] == '.ontology':
+        if os.path.split(file_name)[-1] == '.ontology':
             with open(os.path.join(folder_path, file_name), 'r') as file:
                 relations = file.readlines()
             relations = parse_relations(relations)
