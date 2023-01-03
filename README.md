@@ -144,7 +144,7 @@ If you are trying to understand the code, I recommend starting with the lexer fu
 
 ## Development commands
 
-# build process
+### build process
 
     python3 -m build
     python3 -m twine upload --repository testpypi dist/*
