@@ -1,10 +1,10 @@
 from setuptools import setup
 
 setup(
-    name='PPLX',
-    version='0.4',
+    name='PKLX',
+    version='0.0.1',
     author='PhylomatX',
     author_email='phylomatx@gmail.com',
-    description='PPLX',
+    description='PKLX',
     install_requires=['networkx', 'flask', 'typing', 'argparse'],
 )

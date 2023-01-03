@@ -8,9 +8,9 @@ class ParsingException(Exception):
     pass
 
 
-class PPLX():
+class PKLX():
 
-    def parse(self, tokens: List[str], relations: List[str]) -> 'PPLX':
+    def parse(self, tokens: List[str], relations: List[str]) -> 'PKLX':
         try:
             return Statement().parse(tokens, relations)
         except ParsingException:
@@ -22,13 +22,13 @@ class PPLX():
         raise ParsingException(f"Could not parse PPLX: {tokens}")
 
 
-class Statement(PPLX):
+class Statement(PKLX):
     
     def __init__(self, name=None, knowledge=None):
         self.variable = name
         self.knowledge = knowledge
 
-    def parse(self, tokens: List[str], relations: List[str]) -> PPLX:
+    def parse(self, tokens: List[str], relations: List[str]) -> PKLX:
         if type(tokens) != list or len(tokens) == 0:
             raise ParsingException(f"Could not parse Statement: {tokens}")
         try:
@@ -55,9 +55,9 @@ class Statement(PPLX):
         return f"{self.variable} = {self.knowledge}"
 
 
-class Knowledge(PPLX):
+class Knowledge(PKLX):
     
-    def parse(self, tokens: List[str], relations: List[str]) -> PPLX:
+    def parse(self, tokens: List[str], relations: List[str]) -> PKLX:
         try:
             return Binary().parse(tokens, relations)
         except ParsingException:
@@ -76,7 +76,7 @@ class Binary(Knowledge):
         self.binary_operator = binary_operator
         self.right_expression = right_expression
 
-    def parse(self, tokens: List[str], relations: List[str]) -> PPLX:
+    def parse(self, tokens: List[str], relations: List[str]) -> PKLX:
         if type(tokens) != list or len(tokens) == 0:
             raise ParsingException(f"Could not parse Binary: {tokens}")
         try:
@@ -127,7 +127,7 @@ class Unary(Knowledge):
         self.unary_operator = unary_operator
         self.right_expression = right_expression
 
-    def parse(self, tokens: List[str], relations: List[str]) -> PPLX:
+    def parse(self, tokens: List[str], relations: List[str]) -> PKLX:
         if type(tokens) != list or len(tokens) == 0:
             raise ParsingException(f"Could not parse Unary: {tokens}")
         try:
@@ -155,7 +155,7 @@ class Unary(Knowledge):
 
 class Expression():
     
-    def parse(self, tokens: List[str], relations: List[str]) -> PPLX:
+    def parse(self, tokens: List[str], relations: List[str]) -> PKLX:
         if type(tokens) != list or len(tokens) == 0:
             raise ParsingException(f"Could not parse Expression: {tokens}")
         try:
@@ -172,7 +172,7 @@ class NestedExpression(Expression):
     def __init__(self, knowledge=None):
         self.knowledge = knowledge
 
-    def parse(self, tokens: List[str], relations: List[str]) -> PPLX:
+    def parse(self, tokens: List[str], relations: List[str]) -> PKLX:
         if type(tokens) != list or len(tokens) == 0:
             raise ParsingException(f"Could not parse NestedExpression: {tokens}")
         try:
@@ -197,7 +197,7 @@ class Name(Expression):
     def __init__(self, name=None):
         self.name = name
 
-    def parse(self, token: str, relations: List[str]) -> PPLX:
+    def parse(self, token: str, relations: List[str]) -> PKLX:
         if type(token) == str and token[0].isalpha() and token not in relations:
             self.name = token
             return self
@@ -222,7 +222,7 @@ class Binop():
     def __init__(self, name=None):
         self.name = name
 
-    def parse(self, token: str, relations: List[str]) -> PPLX:
+    def parse(self, token: str, relations: List[str]) -> PKLX:
         if type(token) == str and token[0].isalpha() and token in relations:
             self.name = token
             return self
@@ -244,7 +244,7 @@ class Unop():
     def __init__(self, name=None):
         self.name = name
 
-    def parse(self, token: str, relations: List[str]) -> PPLX:
+    def parse(self, token: str, relations: List[str]) -> PKLX:
         if type(token) == str and token[0].isalpha() and token in relations:
             self.name = token
             return self

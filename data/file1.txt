@@ -1,4 +1,4 @@
--/ M = A IS C -/ Das ist kein PPLX. -/ B IS C -/
+-/ M = A IS C -/ This is no PKLX -/ B IS C -/
 -/ [[A9 B]] IS D -/ 
 -/ ( D IS C ) IS TRUE IF ( A IS B ) -/
 -/ M IS R -/

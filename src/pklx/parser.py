@@ -1,7 +1,7 @@
 import os
 import re
 from typing import List, Tuple
-from .objects import PPLX, Statement
+from .objects import PKLX, Statement
 import networkx as nx
 from .settings import SETTINGS
 
@@ -81,20 +81,20 @@ def lexer(relations: List[str], statement: str) -> List[str]:
     return tokens
 
 
-def parse_statements(relations: List[str], statements: List[str]) -> List[PPLX]:
+def parse_statements(relations: List[str], statements: List[str]) -> List[PKLX]:
     parsed_statements = []
     for statement in statements:
         parsed_statements.append(parse_statement(relations, statement))
     return parsed_statements
 
 
-def parse_statement(relations: List[str], statement: str) -> PPLX:
+def parse_statement(relations: List[str], statement: str) -> PKLX:
     tokens = lexer(relations, statement)
-    parsed_statement = PPLX().parse(tokens, relations)
+    parsed_statement = PKLX().parse(tokens, relations)
     return parsed_statement
 
 
-def statements_to_graph(statements: List[PPLX]) -> nx.DiGraph:
+def statements_to_graph(statements: List[PKLX]) -> nx.DiGraph:
     graph = nx.compose_all([statement.to_graph()[1] for statement in statements])
     for node in list(graph.nodes):
         try:
@@ -105,7 +105,7 @@ def statements_to_graph(statements: List[PPLX]) -> nx.DiGraph:
     return graph
 
 
-def extract_from_statements(statements: List[PPLX], variable: str, done: List[str] = None) -> List[PPLX]:
+def extract_from_statements(statements: List[PKLX], variable: str, done: List[str] = None) -> List[PKLX]:
     extracted_statements = []
     statement_variables = []
     if done is None:

@@ -1,6 +1,6 @@
 import argparse
 from .visx.backend import main as main_view
-from pplx.parser import load, extract_from_statements
+from pklx.parser import load, extract_from_statements
 from .settings import SETTINGS
 from .settings import set_settings as internal_set_settings
 

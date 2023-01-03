@@ -1,5 +1,5 @@
-from pplx.parser import load, extract_from_statements
-from pplx.settings import SETTINGS
+from pklx.parser import load, extract_from_statements
+from pklx.settings import SETTINGS
 
 if __name__ == '__main__':
     relations, statements = load(SETTINGS['FOLDER_PATH'])

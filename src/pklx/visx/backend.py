@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
 import networkx as nx
 import json
-from pplx.settings import SETTINGS
-from pplx.parser import load, statements_to_graph
-from pplx.utils import bfs
+from pklx.settings import SETTINGS
+from pklx.parser import load, statements_to_graph
+from pklx.utils import bfs
 import uuid
 
 app = Flask(__name__)
