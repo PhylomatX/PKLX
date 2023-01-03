@@ -6,13 +6,13 @@ At the moment it is not obvious how it relates to standard knowledge representat
 
 ## Installation
 
-### From PyPI
+### From Test PyPI
 
-    pip install pklx
+    pip install --index-url https://test.pypi.org/simple/ --no-deps pplx
 
 ### Development mode
 
-    git clone https://github.com/PhylomatX/PKLX.git
+    git clone https://github.com/PhylomatX/PKLX.git PKLX
     cd PKLX
     python setup.py develop
 
@@ -148,6 +148,6 @@ If you are trying to understand the code, I recommend starting with the lexer fu
 
     python3 -m build
     python3 -m twine upload --repository testpypi dist/*
-    python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps pplx==0.2
+    python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps pplx
 
 See https://packaging.python.org/en/latest/tutorials/packaging-projects/ for more information.
