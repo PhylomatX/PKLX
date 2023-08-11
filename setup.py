@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='PKLX',
-    version='0.0.2',
+    version='0.0.4',
     author='PhylomatX',
     author_email='phylomatx@gmail.com',
     description='PKLX',

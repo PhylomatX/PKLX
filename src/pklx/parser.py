@@ -112,11 +112,12 @@ def extract_from_statements(statements: List[PKLX], variable: str, done: List[st
         done = []
     if variable in done:
         return []
+
     for statement in statements:
         if statement.contains(variable):
             extracted_statements.append(statement)
-            if type(statement) == Statement:
-                statement_variables.extend(statement.variable.name)
+        if type(statement) == Statement:
+            statement_variables.append(statement.variable.name)
     done.append(variable)
     for statement_variable in statement_variables:
         if statement_variable not in done:

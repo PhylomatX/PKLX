@@ -19,7 +19,7 @@ class PKLX():
             return Knowledge().parse(tokens, relations)
         except ParsingException:
             pass
-        raise ParsingException(f"Could not parse PPLX: {tokens}")
+        raise ParsingException(f"Could not parse PKLX: {tokens}")
 
 
 class Statement(PKLX):
