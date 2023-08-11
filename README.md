@@ -29,7 +29,7 @@ At first you need to create a folder for your knowledge files (simple text or ma
 
 Next, you need to specify the location of the data folder in the settings file. You can do this by running the following command:
 
-    pklx-set-settings FOLDER_PATH <path_to_data>
+    pklx-set-settings FOLDER_PATH <absolute_path_of_data_folder>
 
 Instead of using these commands you can also import the respective functions from the pklx package, please see the `manage.py` file to understand these functions. The next step is to define your own ontology. An ontology is a set of relations that you want to use. You can do this by creating a file called `.ontology` in the data folder. 
 

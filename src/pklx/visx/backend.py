@@ -57,6 +57,11 @@ def main():
     global GRAPH
     global NODES
     relations, statements = load(SETTINGS['FOLDER_PATH'])
+
+    if not relations and not statements:
+        print(f'No relations or statements found at {SETTINGS["FOLDER_PATH"]}. Please use pklx-set-settings FOLDER_PATH <absolute_path_to_data_folder> to set the path to the data folder.')
+        exit(1)
+
     GRAPH = statements_to_graph(statements)
     node_names = [node for node in GRAPH.nodes if GRAPH.nodes[node]['node_type'] == 'variable']
     NODES = json.dumps([{"id": node, "text": node} for node in node_names])
