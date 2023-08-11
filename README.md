@@ -76,7 +76,7 @@ The grammar also allows more complex statements. For example, you can define con
 
     knowledge.txt
         -/ My Triplet = Europe HAS PROPERTY Winter -/
-        -/ My Triplet ONLY IF Australia HAS PROPERTY Summer -/ 
+        -/ My Triplet ONLY IF ( Australia HAS PROPERTY Summer ) -/ 
 
 Here, you assign a knowledge triplet to the variable `My Triplet` and use it in another knowledge triplet to avoid complex structures. This is equivalent to the following syntax:
 
