@@ -6,9 +6,9 @@ At the moment it is not obvious how it relates to standard knowledge representat
 
 ## Installation
 
-### From Test PyPI
+### From PyPI
 
-    pip install --index-url https://test.pypi.org/simple/ --no-deps pklx
+    pip install pklx
 
 ### Development mode
 
@@ -16,8 +16,8 @@ At the moment it is not obvious how it relates to standard knowledge representat
     source ve/bin/activate
     git clone https://github.com/PhylomatX/PKLX.git PKLX
     cd PKLX
-    python setup.py develop
     pip install -r requirements.txt
+    pip install -e .
 
 ## Usage
 
@@ -150,7 +150,16 @@ If you are trying to understand the code, I recommend starting with the lexer fu
 ### build process
 
     python -m build
+
+Upload and download via testpypi:
+
     python -m twine upload --repository testpypi dist/*
     python -m pip install --index-url https://test.pypi.org/simple/ --no-deps pklx
+
+Upload and download via pypi:
+
+    python -m twine upload dist/*
+    python -m pip install pklx
+
 
 See https://packaging.python.org/en/latest/tutorials/packaging-projects/ for more information.
