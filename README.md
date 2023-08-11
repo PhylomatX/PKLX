@@ -8,13 +8,16 @@ At the moment it is not obvious how it relates to standard knowledge representat
 
 ### From Test PyPI
 
-    pip install --index-url https://test.pypi.org/simple/ --no-deps pplx
+    pip install --index-url https://test.pypi.org/simple/ --no-deps pklx
 
 ### Development mode
 
+    virtualenv ve
+    source ve/bin/activate
     git clone https://github.com/PhylomatX/PKLX.git PKLX
     cd PKLX
     python setup.py develop
+    pip install -r requirements.txt
 
 ## Usage
 
@@ -146,8 +149,8 @@ If you are trying to understand the code, I recommend starting with the lexer fu
 
 ### build process
 
-    python3 -m build
-    python3 -m twine upload --repository testpypi dist/*
-    python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps pplx
+    python -m build
+    python -m twine upload --repository testpypi dist/*
+    python -m pip install --index-url https://test.pypi.org/simple/ --no-deps pklx
 
 See https://packaging.python.org/en/latest/tutorials/packaging-projects/ for more information.
