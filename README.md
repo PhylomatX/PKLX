@@ -23,6 +23,14 @@ This readme was tested with Linux. Please replace certain commands with e.g. Win
     pip install -r requirements.txt
     pip install -e .
 
+Set folder path (there is a data folder in PKLX, enter the absolute path to that folder):
+
+    pklx-set-settings FOLDER_PATH <absolute_path_of_data_folder>
+
+Test if everything is set up correctly (there should be a few statements being printed in the console):
+
+    python src/pklx/tests.py
+
 ## Usage
 
 The goal of the following is to create a (very) small knowledge graph for the Solar System.
