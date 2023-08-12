@@ -6,8 +6,12 @@ At the moment it is not obvious how it relates to standard knowledge representat
 
 ## Installation
 
+This readme was tested with Linux. Please replace certain commands with e.g. Windows versions (source ve/bin => ve/Scripts, touch => echo. >, ...) when using other OS.
+
 ### From PyPI
 
+    virtualenv ve
+    source ve/bin/activate
     pip install pklx
 
 ### Development mode
@@ -142,7 +146,7 @@ If you are trying to understand the code, I recommend starting with the lexer fu
 -   Add documentation
 -   Add tests and improve error handling
 -   Extend the PKLX grammar to allow for more complex graph structures
--   Add functionality to analyze created knowledge graphs (e.g. via [graph networks](https://distill.pub/2021/gnn-intro/])
+-   Add functionality to analyze created knowledge graphs (e.g. via [graph networks](https://distill.pub/2021/gnn-intro/))
 -   Research and understand similarities and differences between PKLX and e.g. RDF and OWL
 
 ## Development commands
